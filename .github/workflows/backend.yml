@@ -62,8 +62,8 @@ jobs:
         ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
         deployment_mode: docker-compose
         stack_file_name: docker-compose.azure.yml
+        pre_deployment_command_args: down
         args: up -d
-        docker_prune: 'true'
         pull_images_first: 'true'
       env:
         PGSQL_HOST: ${{ secrets.PGSQL_HOST }}
