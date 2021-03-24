@@ -65,6 +65,7 @@ jobs:
         pre_deployment_command_args: down
         args: up -d
         pull_images_first: 'true'
+        copy_stack_file: true
       env:
         PGSQL_HOST: ${{ secrets.PGSQL_HOST }}
         PGSQL_DATABASE: ${{ secrets.PGSQL_DATABASE }}
