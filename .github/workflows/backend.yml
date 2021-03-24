@@ -33,7 +33,7 @@ jobs:
   #         -e ASPNETCORE_ENVIRONMENT=Development
   #         budbudget.rest:latest
 
-  build-and-publish:
+  build-and-publish-backend:
       runs-on: ubuntu-latest
       steps:
       - name: 'Checkout GitHub Action'
@@ -49,3 +49,24 @@ jobs:
           cd BudBudget.REST
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.rest:${{ github.run_number}}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.rest:${{ github.run_number}}
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Docker Host
+      uses: wshihadeh/docker-deployment-action@v1
+      with:
+        remote_docker_host: ${{ secrets.DOCKER_HOST }} #user@server.com
+        ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+        ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
+        deployment_mode: docker-compose
+        stack_file_name: docker-compose.azure.yml
+        args: up -d
+        docker_prune: 'true'
+        pull_images_first: 'true'
+      env:
+        PGSQL_HOST: ${{ secrets.PGSQL_HOST }}
+        PGSQL_DATABASE: ${{ secrets.PGSQL_DATABASE }}
+        PGSQL_USERNAME: ${{ secrets.PGSQL_USERNAME }}
+        PGSQL_PASSWORD: ${{ secrets.PGSQL_PASSWORD }}
+        ASPNETCORE_ENVIRONMENT: Development
