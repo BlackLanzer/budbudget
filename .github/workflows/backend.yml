@@ -33,7 +33,7 @@ jobs:
   #         -e ASPNETCORE_ENVIRONMENT=Development
   #         budbudget.rest:latest
 
-  build-and-deploy:
+  build-and-publish:
       runs-on: ubuntu-latest
       steps:
       - name: 'Checkout GitHub Action'
@@ -46,5 +46,6 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
+          cd BudBudget.REST
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.rest:${{ github.run_number}}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.rest:${{ github.run_number}}
