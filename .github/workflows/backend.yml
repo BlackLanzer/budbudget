@@ -60,6 +60,7 @@ jobs:
         PGSQL_PASSWORD: ${{ secrets.PGSQL_PASSWORD }}
         ASPNETCORE_ENVIRONMENT: Development
         REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        TAG: ${{ github.run_number }}
     steps:
     - name: Checkout repo
       uses: actions/checkout@main
@@ -87,6 +88,7 @@ jobs:
           export PGSQL_PASSWORD=${{ env.PGSQLPASSWORD }}
           export REGISTRY_LOGIN_SERVER=${{ env.REGISTRY_LOGIN_SERVER }}
           export ASPNETCORE_ENVIRONMENT=${{ env.ASPNETCORE_ENVIRONMENT }}
+          export TAG=${{ env.TAG }}
           docker login --username ${{ secrets.REGISTRY_USERNAME}} --password ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_LOGIN_SERVER }}
           cd ~/budbudget
           docker-compose -f docker-compose.azure.yml down
