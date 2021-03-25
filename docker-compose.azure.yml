@@ -15,3 +15,14 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Password: 12345678
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
       USE_COOKIE_AUTH: "false"
+  postgres:
+    image: postgres
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${PGSQL_DATABASE:-postgres}
+      POSTGRES_USER: ${PGSQL_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${PGSQL_PASSWORD:-postgres}
+      restart: always
