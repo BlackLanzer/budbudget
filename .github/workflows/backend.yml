@@ -53,6 +53,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-publish-backend
+    env:
+        PGSQL_HOST: ${{ secrets.PGSQL_HOST }}
+        PGSQL_DATABASE: ${{ secrets.PGSQL_DATABASE }}
+        PGSQL_USERNAME: ${{ secrets.PGSQL_USERNAME }}
+        PGSQL_PASSWORD: ${{ secrets.PGSQL_PASSWORD }}
+        ASPNETCORE_ENVIRONMENT: Development
     steps:
     - name: Checkout repo
       uses: actions/checkout@main
@@ -76,10 +82,3 @@ jobs:
         pull_images_first: 'true'
         copy_stack_file: true
         deploy_path: /home/blacklanzer/budbudget.rest
-      env:
-        PGSQL_HOST: ${{ secrets.PGSQL_HOST }}
-        PGSQL_DATABASE: ${{ secrets.PGSQL_DATABASE }}
-        PGSQL_USERNAME: ${{ secrets.PGSQL_USERNAME }}
-        PGSQL_PASSWORD: ${{ secrets.PGSQL_PASSWORD }}
-        ASPNETCORE_ENVIRONMENT: Development
-        REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
