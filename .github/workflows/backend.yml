@@ -63,7 +63,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
         script: |
-          echo ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          echo ${{ secrets.REGISTRY_LOGIN_SERVER }} > ~/server.txt
           docker login --username ${{ secrets.REGISTRY_USERNAME}} --password ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_LOGIN_SERVER }}
     - name: Deploy to Docker Host
       uses: wshihadeh/docker-deployment-action@v1
