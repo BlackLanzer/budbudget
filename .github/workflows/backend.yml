@@ -82,3 +82,4 @@ jobs:
         PGSQL_USERNAME: ${{ secrets.PGSQL_USERNAME }}
         PGSQL_PASSWORD: ${{ secrets.PGSQL_PASSWORD }}
         ASPNETCORE_ENVIRONMENT: Development
+        REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
