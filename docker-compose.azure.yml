@@ -15,5 +15,3 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Password: 12345678
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
       USE_COOKIE_AUTH: "false"
-    networks: 
-      - db-network
