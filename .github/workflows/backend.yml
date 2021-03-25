@@ -83,5 +83,5 @@ jobs:
         script: |
           docker login --username ${{ secrets.REGISTRY_USERNAME}} --password ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_LOGIN_SERVER }}
           cd ~/budbudget
-          docker-compose down
-          docker-compose up -d
+          docker-compose -f docker-compose.azure.yml down
+          docker-compose -f docker-compose.azure.yml up -d
