@@ -71,6 +71,7 @@ jobs:
         host: ${{ secrets.DOCKER_HOST }}
         username: ${{ secrets.DOCKER_USERNAME }}
         key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+        envs: $REGISTRY_LOGIN_SERVER
         script: |
           echo variabile: $REGISTRY_LOGIN_SERVER - $PGSQL_HOST - $ASPNETCORE_ENVIRONMENT - $TESTVAR
           docker login --username ${{ secrets.REGISTRY_USERNAME}} --password ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_LOGIN_SERVER }}
