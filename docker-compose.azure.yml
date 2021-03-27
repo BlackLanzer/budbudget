@@ -2,8 +2,6 @@ version: '3'
 services:
   budbudget.rest:
     image: ${REGISTRY_LOGIN_SERVER}/budbudget.rest:${TAG:-latest}
- #   ports:
- #     - 5000:5000
     environment:
       PGSQL_HOST: ${PGSQL_HOST:-postgres}
       PGSQL_PORT: ${PGSQL_PORT:-5432}
@@ -15,6 +13,7 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Password: 12345678
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
       USE_COOKIE_AUTH: "false"
+      
   postgres:
     image: postgres
     volumes:
@@ -26,6 +25,11 @@ services:
       POSTGRES_USER: ${PGSQL_USERNAME:-postgres}
       POSTGRES_PASSWORD: ${PGSQL_PASSWORD:-postgres}
       restart: always
+      
+  budbudget.web:
+    image: ${REGISTRY_LOGIN_SERVER}/budbudget.web:${TAG:-latest}      
+    
+  # Reverse proxy for Let's Encrypt
   nginx:
     image: nginx:1.15-alpine
     volumes:
