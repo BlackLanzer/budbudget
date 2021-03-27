@@ -1,6 +1,6 @@
 # build environment
 FROM node:alpine as build
-ARG API_BASE_URL
+ARG REACT_APP_API_BASE_URL
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
