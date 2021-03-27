@@ -1,4 +1,4 @@
-import { Input, Layout, Select } from "antd";
+import { Button, Input, Layout, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import TransactionsTable, { TableEntry } from "../components/TransactionsTable";
 import { Category } from "../models/Category";
