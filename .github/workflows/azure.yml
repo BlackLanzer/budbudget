@@ -34,14 +34,16 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
 
-      - name: 'Build and push image'
+      - name: 'Docker login'
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: 'Build React container and publish'
+        env:
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
-      - run: |
+        run: |
           cd BudBudget.WEB
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.web:${{ github.run_number}} --build-arg REACT_APP_API_BASE_URL=${{ env.API_BASE_URL }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.web:${{ github.run_number}}
