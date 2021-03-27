@@ -43,7 +43,7 @@ jobs:
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
       - run: |
           cd BudBudget.WEB
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.web:${{ github.run_number}} --build-arg API_BASE_URL=${{ env.API_BASE_URL }}
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.web:${{ github.run_number}} --build-arg REACT_APP_API_BASE_URL=${{ env.API_BASE_URL }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/budbudget.web:${{ github.run_number}}
     
   deploy:
