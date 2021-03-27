@@ -47,7 +47,7 @@ jobs:
     
   deploy:
     runs-on: ubuntu-latest
-    needs: build-and-publish-backend
+    needs: [build-and-publish-backend,build-and-publish-web]
     env:
         PGSQL_HOST: ${{ secrets.PGSQL_HOST }}
         PGSQL_DATABASE: ${{ secrets.PGSQL_DATABASE }}
